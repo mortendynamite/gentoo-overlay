@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-libs/apr-util/apr-util-1.3.9.ebuild,v 1.12 2009/11/04 12:12:05 arfrever Exp $
 
-EAPI=4
+EAPI=6
 
 inherit multilib versionator
 
 DESCRIPTION="Samsung's proprietary printer driver binaries known as UnifiedLinuxDriver"
 HOMEPAGE="http://www.samsung.com/us/support/downloads/ML-6512MD/XAA"
-SRC_URI="http://org.downloadcenter.samsung.com/downloadfile/ContentsFile.aspx?CDSite=US&CttFileID=2041645&CDCttType=DR&ModelType=C&ModelName=CLX-3175FW/XAA&VPath=DR/201310/20131024133933517/uld_v1.00.06.tar.gz -> ${P}.tar.gz"
+SRC_URI="http://downloadcenter.samsung.com/content/DR/201512/20151210091120064/uld_v${PV}_00.99.tar.gz -> ${P}.tar.gz"
 
 LICENSE="SAMSUNG-ELECTRONICS-software-1.06"
 SLOT="0"
