@@ -36,6 +36,6 @@ src_compile() {
 }
 
 src_install() {
-	distutils-r1_src_install
+#	distutils-r1_src_install
 	emake DESTDIR="${D}" install mo
 }
