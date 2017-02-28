@@ -28,11 +28,10 @@ S="${WORKDIR}/${MY_P}"
 RESTRICT="binchecks preserve-libs strip"
 
 src_install() {
-	newicon lib/arduino.png "${MY_PN}".png
-	make_desktop_entry "${MY_PN}" Arduino "${MY_PN}"
+	make_desktop_entry "/opt/${MY_P}/arduino" "Arduino ${PV}" "/opt/${MY_P}/lib/arduino.png"
 
-	mkdir -p "${D}"/opt/"${PN}"
-	cp -a * "${D}"/opt/"${PN}"
+	mkdir -p "${D}"/opt/"${MY_P}"
+	cp -a * "${D}"/opt/"${MY_P}"
 
-	make_wrapper ${MY_PN} "${EROOT}opt/${PN}/${MY_PN}" "${EROOT}opt/${PN}"
+	make_wrapper arduino "${EROOT}opt/${MY_P}/arduino" "${EROOT}opt/${MY_P}"
 }
