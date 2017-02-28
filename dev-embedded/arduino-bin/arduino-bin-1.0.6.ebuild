@@ -11,12 +11,12 @@ HOMEPAGE="https://www.arduino.cc/"
 MY_PN="${PN/-bin}"
 MY_P="${MY_PN}-${PV}"
 SRC_URI="
-	amd64? ( https://downloads.arduino.cc/${MY_P}-linux64.tar.xz -> ${MY_P}-linux64.tar.xz )
-	x86? ( https://downloads.arduino.cc/${MY_P}-linux32.tar.xz -> ${MY_P}-linux32.tar.xz )
+	amd64? ( https://downloads.arduino.cc/${MY_P}-linux64.tgz -> ${MY_P}-linux64.tar.gz )
+	x86? ( https://downloads.arduino.cc/${MY_P}-linux32.tgz -> ${MY_P}-linux32.tar.gz )
 "
 
 LICENSE="GPL-2 LGPL-2.1"
-SLOT="0"
+SLOT="1.0"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE=""
 
@@ -28,7 +28,7 @@ S="${WORKDIR}/${MY_P}"
 RESTRICT="binchecks preserve-libs strip"
 
 src_install() {
-	newicon lib/arduino.png "${MY_PN}".png
+	newicon lib/arduino_icon.ico "${MY_PN}".ico
 	make_desktop_entry "${MY_PN}" Arduino "${MY_PN}"
 
 	mkdir -p "${D}"/opt/"${PN}"
