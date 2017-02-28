@@ -6,7 +6,7 @@ EAPI=6
 
 inherit eutils
 
-DESCRIPTION="electronics prototyping platform based on easy-to-use hardware and software"
+DESCRIPTION="Electronics prototyping platform based on easy-to-use hardware and software"
 HOMEPAGE="https://www.arduino.cc/"
 MY_PN="${PN/-bin}"
 MY_P="${MY_PN}-${PV}"
