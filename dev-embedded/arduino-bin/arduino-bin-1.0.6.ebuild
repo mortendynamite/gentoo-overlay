@@ -20,8 +20,8 @@ SLOT="1.0"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE=""
 
-DEPEND=""
-RDEPEND=""
+DEPEND="dev-embedded/avrdude"
+RDEPEND="$DEPEND"
 
 S="${WORKDIR}/${MY_P}"
 

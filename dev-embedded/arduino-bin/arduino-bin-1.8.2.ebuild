@@ -20,8 +20,8 @@ SLOT="1.8"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="system-gcc"
 
-DEPEND=""
-RDEPEND=""
+DEPEND="dev-embedded/avrdude"
+RDEPEND="$DEPEND"
 
 S="${WORKDIR}/${MY_P}"
 
