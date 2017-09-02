@@ -14,7 +14,7 @@ SRC_URI="http://download.repetier.com/files/host/linux/repetierHostLinux_${MY_PV
 LICENSE="custom"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="vertex"
 
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
@@ -22,7 +22,7 @@ RDEPEND="${DEPEND}"
 S="${WORKDIR}/RepetierHost"
 
 src_prepare() {
-	eapply "${FILESDIR}/${PN}_buildfix.patch"
+#	eapply "${FILESDIR}/${PN}_buildfix.patch"
 	eapply "${FILESDIR}/${PN}_fix-desktop-file.patch"
 	eapply_user
 }
@@ -46,37 +46,55 @@ src_install() {
 
 	insinto ${MY_D}
 	doins ColorSlider.dll
-	doins Ionic.Zip.dll
+	doins DotNetZip.dll
 	doins Newtonsoft.Json.dll
-	doins OpenTK.Compatibility.dll
-	doins OpenTK.Compatibility.dll.config
-	doins OpenTK.Compatibility.xml
+#	doins OpenTK.Compatibility.dll
+#	doins OpenTK.Compatibility.dll.config
+#	doins OpenTK.Compatibility.xml
 	doins OpenTK.dll
-	doins OpenTK.dll.config
+#	doins OpenTK.dll.config
 	doins OpenTK.GLControl.dll
-	doins OpenTK.GLControl.xml
-	doins OpenTK.xml
+#	doins OpenTK.GLControl.xml
+#	doins OpenTK.xml
 	doins RepetierHost.exe
 	doins RepetierHost.exe.config
 	doins RepetierHost.exe.manifest
 	doins RepetierHost.vshost.exe
 	doins RepetierHost.vshost.exe.config
 	doins RepetierHost.vshost.exe.manifest
+	doins RepetierHost.vshost.application 
 	doins RepetierHostExtender.dll
+	doins Repetier-Host.menu
 	doins RepetierHostMimeTypes.xml
-	doins SetBaudrate
+	doexe SetBaudrate
 
 	insinto ${MY_D}/data
 	doins data/ArrowX.stl
 	doins data/ArrowY.stl
 	doins data/ArrowZ.stl
 	doins data/custom.ini
-	doins data/splashscreen.png
+	doins data/empty.stl
+	if ! use vertex ; then 
+		doins data/splashscreen.png
+	fi
+
+	if use vertex ; then
+		newins "${FILESDIR}/vertex/default.reg" default.reg
+		newins "${FILESDIR}/vertex/splashscreen.png" splashscreen.png
+
+		insinto ${MY_D}/data/vertex
+		doins "${FILESDIR}/vertex/ABS-1.75MM.ini"
+		doins "${FILESDIR}/vertex/PLA-1.75MM.ini"
+		doins "${FILESDIR}/vertex/VERTEX_DUAL_HEAD.ini"
+		doins "${FILESDIR}/vertex/VERTEX_SINGLE_HEAD.ini"
+	fi
 
 	insinto ${MY_D}/data/default
 	doins data/default/syntax_en.xml
 	insinto ${MY_D}/data/models
 	doins data/models/tablet.amf
+	doins data/models/DemoPrinter_1.stl
+	doins data/models/DemoPrinter_2.stl
 	insinto ${MY_D}/data/sounds
 	doins data/sounds/bigbong.wav
 	doins data/sounds/bong.wav
@@ -107,11 +125,24 @@ src_install() {
 
 	insinto ${MY_D}/plugins/RRFirmwares
 	doins plugins/RRFirmwares/RRFirmwares.dll
+	doins plugins/RRFirmwares/OpenTK.xml
+	doins plugins/RRFirmwares/OpenTK.GLControl.xml
+	doins plugins/RRFirmwares/marlineeprom.xml
+
+	insinto ${MY_D}/plugins/SlicerSlic3r
+	doins plugins/SlicerSlic3r/SlicerSlic3r.dll
+
+	insinto ${MY_D}/plugins/SlicerSlic3rPE
+	doins plugins/SlicerSlic3rPE/SlicerSlic3rPE.dll
 
 
 	#	cp -R "${S}/." "${D}/" || die "Install failed!"
 
-	dobin repetierHost
+	if use vertex ; then
+		dobin ${FILESDIR}/vertex/repetierHost
+	else
+		dobin repetierHost
+	fi
 
 	insinto /usr/share/applications/
 	newins Repetier-Host.desktop RepetierHost.desktop

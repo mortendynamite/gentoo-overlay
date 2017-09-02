@@ -1,0 +1,28 @@
+#!/bin/sh
+cd /usr/share/RepetierHost
+
+S="/usr/share/RepetierHost/data/vertex"
+D=".local/share/RepetierHost/CuraEngine/vertex"
+
+if [ ! -f ${HOME}/${D}/filament/PLA-1.75MM.ini ]; then
+	mkdir -p ${HOME}/${D}/filament
+	cp ${S}/PLA-1.75MM.ini ${HOME}/${D}/filament/
+fi
+
+if [ ! -f ${HOME}/${D}/filament/ABS-1.75MM.ini ]; then
+	mkdir -p ${HOME}/${D}/filament
+	cp ${S}/ABS-1.75MM.ini ${HOME}/${D}/filament/
+fi
+
+if [ ! -f ${HOME}/${D}/print/VERTEX_DUAL_HEAD.ini ]; then
+	mkdir -p ${HOME}/${D}/print
+	cp ${S}/VERTEX_DUAL_HEAD.ini ${HOME}/${D}/print/
+fi
+
+if [ ! -f ${HOME}/${D}/print/VERTEX_SINGLE_HEAD.ini ]; then
+	mkdir -p ${HOME}/${D}/print
+	cp ${S}/VERTEX_SINGLE_HEAD.ini ${HOME}/${D}/print/
+fi
+
+mono RepetierHost.exe -home /usr/share/RepetierHost
+
