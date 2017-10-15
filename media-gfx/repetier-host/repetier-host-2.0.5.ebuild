@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit eutils versionator
+inherit eutils versionator xdg-utils gnome2-utils
 
 MY_PV=$(replace_all_version_separators '_')
 DESCRIPTION="almost complete 3d-printing workflow"
@@ -149,4 +149,9 @@ src_install() {
 
 	insinto /usr/share/icons/hicolor/128x128/apps/
 	newins repetier-logo.png repetierHost.png
+}
+
+pkg_postinst() {
+	gnome2_icon_cache_update
+	xdg_desktop_database_update
 }
